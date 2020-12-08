@@ -6,7 +6,7 @@ part 'job.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Job {
   String id;
-  DateTime invoiceDate;
+  DateTime date;
   String address;
   double hours;
   double hourRate;
@@ -14,7 +14,7 @@ class Job {
 
   Job({
     this.id,
-    this.invoiceDate,
+    this.date,
     this.address,
     this.hours,
     this.hourRate,
@@ -26,6 +26,13 @@ class Job {
     data.id = snapshot.id;
     return data;
   }
+  factory Job.blank() => Job(
+        address: '',
+        byUserId: '',
+        date: DateTime.now(),
+        hourRate: 0,
+        hours: 0,
+      );
 
   factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
   Map<String, dynamic> toJson() => _$JobToJson(this);

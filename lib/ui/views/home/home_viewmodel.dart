@@ -22,12 +22,8 @@ class HomeViewModel extends BaseViewModel {
     _navigationService.clearStackAndShow(Routes.loginView);
   }
 
-  goToSignup() {
-    _navigationService.navigateTo(Routes.signupView);
-  }
-
   goToNewJob() {
-    // _navigationService.navigateTo(routeName)
+    _navigationService.navigateTo(Routes.newJobView);
   }
 
   getJobs() async {
