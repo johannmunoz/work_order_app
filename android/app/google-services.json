@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "390978458600",
+    "project_id": "work-order-73d47",
+    "storage_bucket": "work-order-73d47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390978458600:android:7ebc681b8e90410fd10a5d",
+        "android_client_info": {
+          "package_name": "com.joml.work_order_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390978458600-g7d6n29o900aejfcunblthjpejk36jkc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4QWngr-iX5FYKiPZiOkbqZP9zPzsmAvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390978458600-g7d6n29o900aejfcunblthjpejk36jkc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:c_link/app/locator.dart';
-import 'package:c_link/app/router.gr.dart';
-import 'package:c_link/services/authentication_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:work_order_app/app/locator.dart';
+import 'package:work_order_app/app/router.gr.dart';
+import 'package:work_order_app/services/authentication_service.dart';
 
-class LoginViewModel extends BaseViewModel {
+class SignupViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
   final DialogService _dialogService = locator<DialogService>();
@@ -28,7 +28,7 @@ class LoginViewModel extends BaseViewModel {
 
     if (result is bool) {
       if (result) {
-        _navigationService.clearStackAndShow(Routes.buildingSelectionView);
+        _navigationService.clearStackAndShow(Routes.homeView);
       } else {
         await _dialogService.showDialog(
           title: 'Login Failure',

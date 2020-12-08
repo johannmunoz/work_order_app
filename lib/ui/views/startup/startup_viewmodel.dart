@@ -1,8 +1,8 @@
-import 'package:c_link/app/locator.dart';
-import 'package:c_link/services/authentication_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:c_link/app/router.gr.dart';
+import 'package:work_order_app/app/locator.dart';
+import 'package:work_order_app/app/router.gr.dart';
+import 'package:work_order_app/services/authentication_service.dart';
 
 class StartUpViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService =
@@ -13,11 +13,7 @@ class StartUpViewModel extends BaseViewModel {
     var hasLoggedInUser = await _authenticationService.isUserLoggedIn();
 
     if (hasLoggedInUser) {
-      if (_authenticationService.hasSelectedBuilding()) {
-        _navigationService.replaceWith(Routes.dashboardView);
-      } else {
-        _navigationService.replaceWith(Routes.buildingSelectionView);
-      }
+      _navigationService.replaceWith(Routes.homeView);
     } else {
       _navigationService.replaceWith(Routes.loginView);
     }

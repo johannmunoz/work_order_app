@@ -1,12 +1,12 @@
-import 'package:c_link/ui/shared/ui_helpers.dart';
-import 'package:c_link/ui/views/login/login_viewmodel.dart';
-import 'package:c_link/ui/widgets/busy_button.dart';
-import 'package:c_link/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
+import 'package:work_order_app/ui/shared/ui_helpers.dart';
+import 'package:work_order_app/ui/views/sign_up/sign_up_viewmodel.dart';
+import 'package:work_order_app/ui/widgets/busy_button.dart';
+import 'package:work_order_app/ui/widgets/input_field.dart';
 
-class LoginView extends StatelessWidget {
+class SignupView extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -17,7 +17,7 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<LoginViewModel>.reactive(
+    return ViewModelBuilder<SignupViewModel>.reactive(
       onModelReady: (model) {
         SystemChrome.setPreferredOrientations(
           [
@@ -26,7 +26,7 @@ class LoginView extends StatelessWidget {
           ],
         );
       },
-      viewModelBuilder: () => LoginViewModel(),
+      viewModelBuilder: () => SignupViewModel(),
       builder: (context, model, child) {
         var mediaQuery = MediaQuery.of(context);
         bool isKeyboardOpen = false;
@@ -50,7 +50,7 @@ class LoginView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     verticalSpaceSmall,
-                    _LogoImage(shrink: isKeyboardOpen),
+                    // _LogoImage(shrink: isKeyboardOpen),
                     isKeyboardOpen ? verticalSpaceSmall : verticalSpaceLarge,
                     InputField(
                       placeholder: 'Your Email',
@@ -98,7 +98,7 @@ class LoginView extends StatelessWidget {
                       children: [
                         Expanded(
                           child: BusyButton(
-                            title: 'SIGN IN',
+                            title: 'SIGN UP',
                             busy: model.isBusy,
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
@@ -164,7 +164,7 @@ class _LogoImage extends StatelessWidget {
     }
     return SizedBox(
       height: maxWidth,
-      child: Image.asset('assets/images/logo.png'),
+      // child: Image.asset('assets/images/logo.png'),
     );
   }
 }

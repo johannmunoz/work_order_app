@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
+import 'package:work_order_app/ui/shared/ui_helpers.dart';
 import 'package:work_order_app/ui/views/login/login_viewmodel.dart';
+import 'package:work_order_app/ui/widgets/busy_button.dart';
+import 'package:work_order_app/ui/widgets/input_field.dart';
 
 class LoginView extends StatelessWidget {
   final emailController = TextEditingController();
@@ -161,7 +164,7 @@ class _LogoImage extends StatelessWidget {
     }
     return SizedBox(
       height: maxWidth,
-      child: Image.asset('assets/images/logo.png'),
+      // child: Image.asset('assets/images/logo.png'),
     );
   }
 }

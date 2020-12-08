@@ -1,6 +1,6 @@
-import 'package:c_link/ui/views/startup/startup_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:work_order_app/ui/views/startup/startup_viewmodel.dart';
 
 class StartupView extends StatelessWidget {
   @override
@@ -27,11 +27,11 @@ class _StartUpWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          SizedBox(
-            width: 300,
-            height: 100,
-            child: Image.asset('assets/images/logo.png'),
-          ),
+          // SizedBox(
+          //   width: 300,
+          //   height: 100,
+          //   child: Image.asset('assets/images/logo.png'),
+          // ),
           CircularProgressIndicator(
             strokeWidth: 3,
             valueColor: AlwaysStoppedAnimation(
