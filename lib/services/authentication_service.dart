@@ -7,6 +7,8 @@ import 'package:injectable/injectable.dart';
 class AuthenticationService {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  String get uid => _firebaseAuth.currentUser.uid;
+
   Future loginWithEmail({
     @required String email,
     @required String password,
