@@ -116,23 +116,26 @@ class LoginView extends StatelessWidget {
                     ),
                     if (!isKeyboardOpen) verticalSpaceLarge,
                     if (!isKeyboardOpen)
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Don’t have an Account?  ',
-                              style: TextStyle(
-                                color: Color(0xFF6D89AF),
+                      GestureDetector(
+                        onTap: () => model.goToSignup(),
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Don’t have an Account?  ',
+                                style: TextStyle(
+                                  color: Color(0xFF6D89AF),
+                                ),
                               ),
-                            ),
-                            TextSpan(
-                              text: 'Register',
-                              style: TextStyle(
-                                color: Color(0xFF2B8DCD),
-                                fontWeight: FontWeight.bold,
+                              TextSpan(
+                                text: 'Register',
+                                style: TextStyle(
+                                  color: Color(0xFF2B8DCD),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                   ],

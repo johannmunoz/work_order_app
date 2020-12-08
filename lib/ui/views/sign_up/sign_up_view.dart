@@ -84,13 +84,6 @@ class SignupView extends StatelessWidget {
                       },
                     ),
                     verticalSpaceSmall,
-                    if (!isKeyboardOpen)
-                      Text(
-                        'Forgot Your Password?',
-                        style: TextStyle(
-                          color: Color(0xFF6D89AF),
-                        ),
-                      ),
                     isKeyboardOpen ? verticalSpaceSmall : verticalSpaceMedium,
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -114,27 +107,6 @@ class SignupView extends StatelessWidget {
                         )
                       ],
                     ),
-                    if (!isKeyboardOpen) verticalSpaceLarge,
-                    if (!isKeyboardOpen)
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Don’t have an Account?  ',
-                              style: TextStyle(
-                                color: Color(0xFF6D89AF),
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Register',
-                              style: TextStyle(
-                                color: Color(0xFF2B8DCD),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                   ],
                 ),
               ),

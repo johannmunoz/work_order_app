@@ -19,7 +19,7 @@ class SignupViewModel extends BaseViewModel {
   }) async {
     setBusy(true);
 
-    var result = await _authenticationService.loginWithEmail(
+    var result = await _authenticationService.signupWithEmail(
       email: email.trim(),
       password: password,
     );
