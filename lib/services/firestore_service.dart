@@ -16,6 +16,7 @@ class FirestoreService {
       var snap = await _db
           .collection('jobs')
           .where('byUserId', isEqualTo: _as.uid)
+          .orderBy('date', descending: true)
           .get();
       jobs = snap.docs.map((document) => Job.fromSnapshot(document)).toList();
     } on Exception catch (e) {
