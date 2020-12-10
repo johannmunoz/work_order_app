@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
         accentColor: Colors.blue[200],
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.grey[200],
       ),
       initialRoute: router.Routes.startupView,
       onGenerateRoute: router.Router(),

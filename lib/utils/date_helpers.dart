@@ -62,3 +62,10 @@ DateTime timeOfDayToDateTime(TimeOfDay timeOfDay, [DateTime dateTime]) {
     timeOfDay.minute,
   );
 }
+
+String getFormattedDate(DateTime dateTime) {
+  if (dateTime == null) return '';
+  final format = DateFormat.yMMMMd();
+  final dateString = format.format(dateTime);
+  return dateString;
+}

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:work_order_app/ui/shared/ui_helpers.dart';
 import 'package:work_order_app/ui/views/home/home_viewmodel.dart';
+import 'package:work_order_app/utils/currency_helpers.dart';
+import 'package:work_order_app/utils/date_helpers.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -30,12 +33,79 @@ class HomeView extends StatelessWidget {
                     itemCount: model.jobs.length,
                     itemBuilder: (context, index) {
                       final job = model.jobs[index];
-                      return ListTile(
-                        title: Text(job.address),
-                        subtitle: Text(
-                          job.date.toIso8601String(),
+                      return Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.home_outlined),
+                                        Expanded(
+                                          child: Text(
+                                            job.address,
+                                            maxLines: 2,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    verticalSpaceSmall,
+                                    Row(
+                                      children: [
+                                        Icon(Icons.date_range_outlined),
+                                        Text(
+                                          getFormattedDate(job.date),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                                Icons.monetization_on_outlined),
+                                            Text(
+                                                '\$${job.hourRate.toStringAsFixed(2)}'),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.timer),
+                                            Text(
+                                                '${job.hours.toStringAsFixed(1)} hours'),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                      ],
+                                    ),
+                                    verticalSpaceSmall,
+                                    Text(
+                                        'Total: ${getTotal(job.hourRate, job.hours)}')
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
+                      // return ListTile(
+                      //   title: Text(job.address),
+                      //   subtitle: Text(
+                      //     getFormattedDate(job.date),
+                      //   ),
+                      // );
                     },
                   ),
       ),
