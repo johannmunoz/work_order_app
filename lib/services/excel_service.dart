@@ -9,11 +9,30 @@ import 'package:work_order_app/utils/date_helpers.dart';
 
 @lazySingleton
 class ExcelService {
-  Future<void> createFileWithJobs(List<Job> jobs) async {
+  Future<void> createFileWithJobs(List<Job> jobs,
+      [DateTime startDate, DateTime endDate]) async {
     try {
+      final fromDate = startDate != null
+          ? startDate
+          : jobs.isNotEmpty
+              ? jobs.last.date
+              : DateTime.now();
+      final toDate = endDate != null
+          ? endDate
+          : jobs.isNotEmpty
+              ? jobs.first.date
+              : DateTime.now();
+
       var excel = Excel.createExcel();
       final sheetName = await excel.getDefaultSheet();
       final sheetObj = excel.sheets[sheetName];
+
+      sheetObj.insertRowIterables([
+        'From',
+        getFormattedDate(fromDate),
+        'To',
+        getFormattedDate(toDate),
+      ], 0);
 
       sheetObj.insertRowIterables([
         'Address',
@@ -21,7 +40,7 @@ class ExcelService {
         'Hours',
         'Hours Rate',
         'Value',
-      ], 0);
+      ], 1);
 
       jobs.asMap().forEach((index, job) {
         sheetObj.insertRowIterables([

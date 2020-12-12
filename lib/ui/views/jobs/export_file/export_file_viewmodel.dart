@@ -16,9 +16,14 @@ class ExportFileViewModel extends BaseViewModel {
 
   void exportJobsToExcel() async {
     try {
+      final isInvalid = _validateDates();
+      if (isInvalid != null) {
+        _snackbarService.showSnackbar(message: isInvalid);
+        return;
+      }
       final jobs = await _firestoreService.getJobs(_startDate, _endDate);
 
-      await _excelService.createFileWithJobs(jobs);
+      await _excelService.createFileWithJobs(jobs, _startDate, _endDate);
       await _navigationService.clearStackAndShow(Routes.homeView);
       _snackbarService.showSnackbar(message: 'File successfully exported!');
     } catch (e) {
@@ -33,5 +38,14 @@ class ExportFileViewModel extends BaseViewModel {
 
   void setEndDate(DateTime date) {
     _endDate = date;
+  }
+
+  String _validateDates() {
+    if (_startDate != null && _endDate != null) {
+      if (_startDate.isAfter(_endDate)) {
+        return 'Start date can\'t be after end date';
+      }
+    }
+    return null;
   }
 }
