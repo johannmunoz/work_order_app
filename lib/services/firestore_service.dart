@@ -9,15 +9,26 @@ class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final AuthenticationService _as = locator<AuthenticationService>();
 
-  Future<List<Job>> getJobs() async {
+  Future<List<Job>> getJobs([DateTime startDate, DateTime endDate]) async {
     List<Job> jobs = [];
 
     try {
-      var snap = await _db
+      var query = _db
           .collection('jobs')
           .where('byUserId', isEqualTo: _as.uid)
-          .orderBy('date', descending: true)
-          .get();
+          .orderBy('date', descending: true);
+
+      if (startDate != null) {
+        query = query.where('date',
+            isGreaterThanOrEqualTo: startDate.toIso8601String());
+      }
+
+      if (endDate != null) {
+        query =
+            query.where('date', isLessThanOrEqualTo: endDate.toIso8601String());
+      }
+      var snap = await query.get();
+
       jobs = snap.docs.map((document) => Job.fromSnapshot(document)).toList();
     } on Exception catch (e) {
       print(e);

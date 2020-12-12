@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:work_order_app/models/job.dart';
 import 'package:work_order_app/ui/shared/ui_helpers.dart';
 
@@ -22,6 +23,7 @@ class JobForm extends StatefulWidget {
 
 class _JobFormState extends State<JobForm> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController dateController = TextEditingController();
   Job job = Job.blank();
   @override
   void initState() {
@@ -40,50 +42,69 @@ class _JobFormState extends State<JobForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            verticalSpaceMedium,
-            TextFormField(
-              initialValue: widget.initialValue.address,
-              decoration: InputDecoration(
-                labelText: 'Address',
-                border: OutlineInputBorder(),
-              ),
-              textCapitalization: TextCapitalization.sentences,
-              onSaved: (value) => job.address = value,
+      child: Column(
+        children: [
+          verticalSpaceLarge,
+          TextFormField(
+            initialValue: widget.initialValue.address,
+            decoration: InputDecoration(
+              labelText: 'Address',
+              border: OutlineInputBorder(),
             ),
-            verticalSpaceMedium,
-            TextFormField(
-              initialValue: widget.initialValue.hours.toString(),
-              decoration: InputDecoration(
-                labelText: 'Hours',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-              onSaved: (value) => job.hours = double.tryParse(value),
+            textCapitalization: TextCapitalization.sentences,
+            onSaved: (value) => job.address = value,
+          ),
+          verticalSpaceLarge,
+          TextFormField(
+            initialValue: widget.initialValue.hours.toString(),
+            decoration: InputDecoration(
+              labelText: 'Hours',
+              border: OutlineInputBorder(),
             ),
-            verticalSpaceMedium,
-            TextFormField(
-              initialValue: widget.initialValue.hourRate.toString(),
-              decoration: InputDecoration(
-                labelText: 'Hours Rate',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-              onSaved: (value) => job.hourRate = double.tryParse(value),
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            onSaved: (value) => job.hours = double.tryParse(value),
+          ),
+          verticalSpaceLarge,
+          TextFormField(
+            initialValue: widget.initialValue.hourRate.toString(),
+            decoration: InputDecoration(
+              labelText: 'Hours Rate',
+              border: OutlineInputBorder(),
             ),
-            verticalSpaceMedium,
-            CalendarDatePicker(
-              firstDate: widget.initialValue.date.subtract(Duration(days: 365)),
-              initialDate: widget.initialValue.date,
-              lastDate: widget.initialValue.date.add(Duration(days: 365)),
-              onDateChanged: (DateTime value) => job.date = value,
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            onSaved: (value) => job.hourRate = double.tryParse(value),
+          ),
+          verticalSpaceLarge,
+          TextField(
+            onTap: () async {
+              final datePicked = await _pickDate(context, dateController);
+              job.date = datePicked;
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            controller: dateController,
+            decoration: InputDecoration(
+              labelText: 'Job date',
+              suffixIcon: Icon(Icons.calendar_today),
+              border: OutlineInputBorder(),
             ),
-            verticalSpaceLarge,
-          ],
-        ),
+          ),
+          verticalSpaceLarge,
+        ],
       ),
     );
+  }
+
+  Future<DateTime> _pickDate(
+      BuildContext context, TextEditingController controller) async {
+    final date = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2100),
+    );
+    if (date == null) return null;
+    final formattedDate = DateFormat("dd/MM/yyyy").format(date);
+    controller.text = formattedDate;
+    return date;
   }
 }

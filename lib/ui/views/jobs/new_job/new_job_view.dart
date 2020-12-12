@@ -16,14 +16,26 @@ class NewJobView extends StatelessWidget {
         appBar: AppBar(
           title: Text('New Job'),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton.extended(
           onPressed: () => controller.add(true),
-          child: Icon(Icons.save),
+          label: Text('ADD JOB'),
         ),
-        body: JobForm(
-          initialValue: Job.blank(),
-          controller: controller,
-          onSave: (job) => model.addNewJob(job),
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: SingleChildScrollView(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 500.0),
+                child: JobForm(
+                  initialValue: Job.blank(),
+                  controller: controller,
+                  onSave: (job) => model.addNewJob(job),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
           elevation: 0,
           actions: [
             FlatButton(
-              onPressed: model.exportJobsToExcel,
+              onPressed: model.goToExportFile,
               child: Text(
                 'EXPORT',
                 style: TextStyle(color: Colors.white),
