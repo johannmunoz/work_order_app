@@ -69,3 +69,10 @@ String getFormattedDate(DateTime dateTime) {
   final dateString = format.format(dateTime);
   return dateString;
 }
+
+String getFormattedDateFilename(DateTime dateTime) {
+  if (dateTime == null) return '';
+  final format = DateFormat('yyyy-MM-dd-HH-mm-ss');
+  final dateString = format.format(dateTime);
+  return dateString;
+}

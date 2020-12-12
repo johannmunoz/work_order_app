@@ -16,9 +16,13 @@ class HomeView extends StatelessWidget {
           title: Text('Jobs'),
           actions: [
             IconButton(
+              icon: Icon(Icons.file_copy_outlined),
+              onPressed: () => model.exportJobsToExcel(),
+            ),
+            IconButton(
               icon: Icon(Icons.logout),
               onPressed: () => model.logout(),
-            )
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
