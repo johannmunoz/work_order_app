@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Work Order',
       theme: ThemeData(
-        primaryColor: Colors.blue,
-        accentColor: Colors.blue[200],
+        primaryColor: Colors.orange[800],
+        accentColor: Colors.green[200],
         scaffoldBackgroundColor: Colors.grey[200],
       ),
       initialRoute: router.Routes.startupView,

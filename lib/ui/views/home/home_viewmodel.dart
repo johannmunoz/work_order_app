@@ -16,13 +16,19 @@ class HomeViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = locator<FirestoreService>();
   final ExcelService _excelService = locator<ExcelService>();
   final SnackbarService _snackbarService = locator<SnackbarService>();
+  final DialogService _dialogService = locator<DialogService>();
 
   List<Job> _jobs;
   List<Job> get jobs => _jobs;
 
   Future logout() async {
-    await _authenticationService.logout();
-    _navigationService.clearStackAndShow(Routes.loginView);
+    final result = await _dialogService.showConfirmationDialog(
+        title: 'Are you sure?', description: 'Would you like to log out?');
+
+    if (result.confirmed) {
+      await _authenticationService.logout();
+      _navigationService.clearStackAndShow(Routes.loginView);
+    }
   }
 
   goToNewJob() {

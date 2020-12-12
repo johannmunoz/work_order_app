@@ -14,14 +14,21 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           title: Text('Jobs'),
+          elevation: 0,
           actions: [
-            IconButton(
-              icon: Icon(Icons.file_copy_outlined),
-              onPressed: () => model.exportJobsToExcel(),
+            FlatButton(
+              onPressed: model.exportJobsToExcel,
+              child: Text(
+                'EXPORT',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
-            IconButton(
-              icon: Icon(Icons.logout),
-              onPressed: () => model.logout(),
+            FlatButton(
+              onPressed: model.logout,
+              child: Text(
+                'LOGOUT',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -34,6 +41,7 @@ class HomeView extends StatelessWidget {
             : model.jobs.isEmpty
                 ? Center(child: Text('No jobs found'))
                 : ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
                     itemCount: model.jobs.length,
                     itemBuilder: (context, index) {
                       final job = model.jobs[index];
