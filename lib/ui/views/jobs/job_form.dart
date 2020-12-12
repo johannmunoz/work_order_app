@@ -77,9 +77,9 @@ class _JobFormState extends State<JobForm> {
           verticalSpaceLarge,
           TextField(
             onTap: () async {
+              FocusScope.of(context).requestFocus(FocusNode());
               final datePicked = await _pickDate(context, dateController);
               job.date = datePicked;
-              FocusScope.of(context).requestFocus(FocusNode());
             },
             controller: dateController,
             decoration: InputDecoration(

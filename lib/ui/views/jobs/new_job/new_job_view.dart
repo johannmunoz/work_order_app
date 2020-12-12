@@ -26,7 +26,7 @@ class NewJobView extends StatelessWidget {
           },
           child: SingleChildScrollView(
             child: Center(
-              child: ConstrainedBox(
+              child: Container(
                 constraints: BoxConstraints(maxWidth: 500.0),
                 child: JobForm(
                   initialValue: Job.blank(),

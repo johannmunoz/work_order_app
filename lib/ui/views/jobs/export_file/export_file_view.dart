@@ -19,46 +19,53 @@ class ExportFileView extends StatelessWidget {
           label: Text('EXPORT'),
           onPressed: () => model.exportJobsToExcel(),
         ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 500.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  verticalSpaceMedium,
-                  Text('Select report start date:'),
-                  verticalSpaceSmall,
-                  TextField(
-                    onTap: () async {
-                      final datePicked =
-                          await _pickDate(context, startDateController);
-                      model.setStartDate(datePicked);
-                    },
-                    controller: startDateController,
-                    decoration: InputDecoration(
-                      labelText: 'Start Date',
-                      suffixIcon: Icon(Icons.calendar_today),
-                      border: OutlineInputBorder(),
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: SingleChildScrollView(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 500.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    verticalSpaceLarge,
+                    Text('Select report start date:'),
+                    verticalSpaceSmall,
+                    TextField(
+                      onTap: () async {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        final datePicked =
+                            await _pickDate(context, startDateController);
+                        model.setStartDate(datePicked);
+                      },
+                      controller: startDateController,
+                      decoration: InputDecoration(
+                        labelText: 'Start Date',
+                        suffixIcon: Icon(Icons.calendar_today),
+                        border: OutlineInputBorder(),
+                      ),
                     ),
-                  ),
-                  verticalSpaceMedium,
-                  Text('Select report end date:'),
-                  verticalSpaceSmall,
-                  TextField(
-                    onTap: () async {
-                      final datePicked =
-                          await _pickDate(context, endDateController);
-                      model.setEndDate(datePicked);
-                    },
-                    controller: endDateController,
-                    decoration: InputDecoration(
-                      labelText: 'End Date',
-                      suffixIcon: Icon(Icons.calendar_today),
-                      border: OutlineInputBorder(),
+                    verticalSpaceMedium,
+                    Text('Select report end date:'),
+                    verticalSpaceSmall,
+                    TextField(
+                      onTap: () async {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        final datePicked =
+                            await _pickDate(context, endDateController);
+                        model.setEndDate(datePicked);
+                      },
+                      controller: endDateController,
+                      decoration: InputDecoration(
+                        labelText: 'End Date',
+                        suffixIcon: Icon(Icons.calendar_today),
+                        border: OutlineInputBorder(),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
