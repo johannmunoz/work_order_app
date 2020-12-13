@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:work_order_app/models/job.dart';
 import 'package:path/path.dart';
 import 'package:work_order_app/utils/date_helpers.dart';
+import 'dart:io' show Platform;
 
 @lazySingleton
 class ExcelService {
@@ -78,7 +79,12 @@ class ExcelService {
   }
 
   Future<String> get _localPath async {
-    final directory = await getExternalStorageDirectory();
-    return directory.path;
+    if (Platform.isIOS) {
+      final directory = await getApplicationDocumentsDirectory();
+      return directory.path;
+    } else {
+      final directory = await getExternalStorageDirectory();
+      return directory.path;
+    }
   }
 }
